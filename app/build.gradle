@@ -13,8 +13,14 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    //签名
+    signingConfigs{
+
     }
 }
 
@@ -26,4 +32,23 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+}
+
+task getReleasePassword << {
+    def password = ''
+    if(rootProject.file('private.properties').exists()){
+        java.util.Properties properties = new Properties()
+        properties.load(rootProject.file('private.properties').newDataInputStream())
+        password = properties.getProperty("release.password")
+        if(!password.trim()){
+            password = new String(System.console()).readPassword("\n请输入签名文件密码")
+        }
+    }
+}
+
+tasks.whenTaskAdded { theTask->
+    if(theTask.name == "packageRelease"){
+        theTask.dependsOn "getReleasePassword"
+    }
+
 }

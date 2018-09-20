@@ -17,11 +17,22 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true //是否混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' //混淆问及那
+            shrinkResources true //是否去除未利用的资源
+            zipAlignEnabled true //是否使用zipAlign工具压缩，使得读取应用资源更加快速，优化内存提升应用与系统交互速度
         }
     }
 
+    //免除findViewById编写，绑定变量、事件等
+    dataBinding{
+        enabled true
+    }
+
+    lintOptions{
+        abortOnError: false //如果发现错误lint工具是否应该退出这个程序
+        ignoreWarings: true //忽略警告
+    }
 }
 
 dependencies {

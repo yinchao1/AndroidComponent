@@ -41,6 +41,11 @@ public class GlideCache extends AppGlideModule {
     }
 
     @Override
+    public boolean isManifestParsingEnabled() {
+        return false;
+    }
+
+    @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
         super.registerComponents(context, glide, registry);
     }
