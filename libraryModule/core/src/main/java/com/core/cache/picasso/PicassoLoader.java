@@ -182,4 +182,20 @@ public class PicassoLoader implements ILoaderStrategy {
             return "bitmapAngle()";
         }
     }
+
+    /**
+     TODO
+     界面中使用
+     String url = "http://ww2.sinaimg.cn/large/7a8aed7bgw1eutsd0pgiwj20go0p0djn.jpg";
+     ImageLoader.getInstance()
+     .load(url)
+     .angle(80)
+     .resize(400, 600)
+     .centerCrop()
+     .config(Bitmap.Config.RGB_565)
+     .placeholder(R.mipmap.test)
+     .error(R.mipmap.test)
+     .skipLocalCache(true)
+     .into(imageView);
+     */
 }
