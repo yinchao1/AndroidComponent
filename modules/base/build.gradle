@@ -1,43 +1,37 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-
-
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
     }
 
     buildTypes {
         release {
             minifyEnabled true //是否混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' //混淆问及那
-            shrinkResources true //是否去除未利用的资源
-            zipAlignEnabled true //是否使用zipAlign工具压缩，使得读取应用资源更加快速，优化内存提升应用与系统交互速度
+        }
+        debug {
+            minifyEnabled false
         }
     }
 
-    //免除findViewById编写，绑定变量、事件等
-    dataBinding{
-        enabled true
-    }
-
-    lintOptions{
-        abortOnError: false //如果发现错误lint工具是否应该退出这个程序
-        ignoreWarings: true //忽略警告
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    compile project(path: ':libraryModule:core')
-    compile project(path: ':modules:router')
+    api rootProject.ext.dependencies.appcompatV7
+
+    /---------------kotlin-------------------/
+    api rootProject.ext.dependencies.kotlin_stdlib_jre7
+    api rootProject.ext.dependencies.anko
+
+    /---------------核心模块-------------------/
+    //底层公共模块(缓存、数据库、日志、网络请求等)
+    api project(path: ':libraryModule:core')
+    //路由模块
+    api project(path: ':libraryModule:router')
 }

@@ -8,7 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/libraryModule/core/core.iml" filepath="$PROJECT_DIR$/libraryModule/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraryModule/libraryModule.iml" filepath="$PROJECT_DIR$/libraryModule/libraryModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/modules.iml" filepath="$PROJECT_DIR$/modules/modules.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/router/router.iml" filepath="$PROJECT_DIR$/modules/router/router.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libraryModule/router/router.iml" filepath="$PROJECT_DIR$/libraryModule/router/router.iml" />
     </modules>
   </component>
 </project>

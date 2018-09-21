@@ -1,1 +1,1 @@
-include ':app', ':libraryModule:core', ':modules:router', ':modules:base'
+include ':app', ':libraryModule:core', ':libraryModule:router', ':modules:base'

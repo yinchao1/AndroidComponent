@@ -1,0 +1,36 @@
+ext{
+    //是否加载指定组件
+    isComponent = true
+
+    //项目统一版本号配置
+    android = [
+            compileSdkVersion : compile_sdk_version as int,
+            buildToolsVersion : build_tools_version,
+            minSdkVersion     : min_sdk_version as int,
+            targetSdkVersion  : target_sdk_version as int,
+            versionCode       : version_code as int,
+            versionName       : version_name
+    ]
+
+    //第三方库版本号
+    libsVersion = [
+            supportLibraryVersion = "26.1.0",
+            kotlinVersion         = "1.2.30",
+            ankoVersion           = "0.10.3",
+            okhttp3Version        = "3.8.1",
+            gsonVersion           = "2.8.2",
+            glideVersion          = "4.5.0"
+    ]
+
+    //第三方依赖库
+    dependencies = [
+            appcompatV7        : "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion",
+            design             : "com.android.support:design:$rootProject.supportLibraryVersion",
+            okhttp3            : "com.squareup.okhttp3:okhttp:$rootProject.okhttp3Version",
+            gson               : "com.google.code.gson:gson:$rootProject.gsonVersion",
+            glide              : "com.github.bumptech.glide:glide:$rootProject.glideVersion",
+            glideCompiler      : "com.github.bumptech.glide:compiler:$rootProject.glideVersion",
+            kotlin_stdlib_jre7 : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$rootProject.kotlinVersion",
+            anko               : "org.jetbrains.anko:anko:$rootProject.ankoVersion"
+    ]
+}

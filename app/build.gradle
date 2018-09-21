@@ -1,20 +1,31 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
     defaultConfig {
         applicationId "com.xiaomaigui.phone"
-        minSdkVersion 21
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        multiDexEnabled true //支持分包
     }
+
+    aaptOptions{
+        cruncherEnabled true //如果是PNG图片可以大量快速处理
+        useNewCruncher true
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
-            shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true //是否去除未利用的资源 要求minifyEnabled为true才生效
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' //混淆文件位置
+            zipAlignEnabled true //是否使用zipAlign工具压缩，使得读取应用资源更加快速，优化内存提升应用与系统交互速度
         }
     }
 
@@ -22,16 +33,27 @@ android {
     signingConfigs{
 
     }
+
+    //免除findViewById编写，绑定变量、事件等
+    dataBinding{
+        enabled true
+    }
+
+    lintOptions{
+        abortOnError false //如果发现错误lint工具是否应该退出这个程序
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:design:26.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:0.5'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+    implementation rootProject.ext.dependencies.appcompatV7
+    implementation rootProject.ext.dependencies.design
+
+    if(rootProject.ext.isComponent){
+        api project(':modules:base')
+    }else{
+
+    }
 }
 
 task getReleasePassword << {
