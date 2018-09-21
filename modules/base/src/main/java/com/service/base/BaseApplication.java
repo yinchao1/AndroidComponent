@@ -2,6 +2,8 @@ package com.service.base;
 
 import android.app.Application;
 
+import com.core.cache.ImageLoader;
+import com.core.cache.picasso.PicassoLoader;
 import com.core.logger.LogType;
 import com.core.logger.Logger;
 import com.service.router.Configuration;
@@ -18,15 +20,17 @@ public class BaseApplication extends Application{
         //初始化路由
         Router.initialize(new Configuration.Builder()
              //调试模式，开启后会打印log
-            .setDebuggable(BuildConfig.DEBUG)
+            .setDebuggable(BuildConfig.DEBUG_FLAG)
              // 模块名(即project.name)，每个使用Router的module都要在这里注册
             .registerModules("app", "base")
             .build());
 
         //设置日志
         Logger.APP_PKG_NAME = this.getPackageName();//设置包名-默认的日志Tag
-        Logger.LOG_OPEN = BuildConfig.DEBUG;//设置Log开关
+        Logger.LOG_OPEN = BuildConfig.LOG_FLAG;//设置Log开关
         Logger.LOG_LEVEL = LogType.V;//设置Log等级, >= 这个配置的log才会显示
 
+        //设置图片加载类
+        ImageLoader.getInstance().setGlobalImageLoader(new PicassoLoader(this));
     }
 }

@@ -25,7 +25,8 @@ dependencies {
     api rootProject.ext.dependencies.okhttp3
     //json工具
     api rootProject.ext.dependencies.gson
-    //图片缓存框架
+    //图片加载框架(glide)
     api rootProject.ext.dependencies.glide
-    annotationProcessor rootProject.ext.dependencies.glideCompiler
+    //图片加载框架(fresco)
+    api rootProject.ext.dependencies.picasso
 }

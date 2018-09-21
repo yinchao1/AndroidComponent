@@ -6,7 +6,8 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name="com.xiaomaigui.XmgApplication">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

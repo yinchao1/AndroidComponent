@@ -15,31 +15,43 @@ android {
         multiDexEnabled true //支持分包
     }
 
-    aaptOptions{
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true //去除无用的资源
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' //混淆文件位置
+            zipAlignEnabled true //是否使用zipAlign工具压缩，使得读取应用资源更加快速，优化内存提升应用与系统交互速度
+            buildConfigField 'boolean', 'LOG_FLAG', 'false' //日志开关
+            buildConfigField 'boolean', 'DEBUG_FLAG', 'false' //调试开关
+        }
+        debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            buildConfigField 'boolean', 'LOG_FLAG', 'true'
+            buildConfigField 'boolean', 'DEBUG_FLAG', 'false'
+        }
+    }
+
+    productFlavors {
+
+    }
+
+    //签名
+    signingConfigs {
+
+    }
+
+    aaptOptions {
         cruncherEnabled true //如果是PNG图片可以大量快速处理
         useNewCruncher true
     }
 
-    buildTypes {
-        release {
-            minifyEnabled true
-            shrinkResources true //是否去除未利用的资源 要求minifyEnabled为true才生效
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' //混淆文件位置
-            zipAlignEnabled true //是否使用zipAlign工具压缩，使得读取应用资源更加快速，优化内存提升应用与系统交互速度
-        }
-    }
-
-    //签名
-    signingConfigs{
-
-    }
-
     //免除findViewById编写，绑定变量、事件等
-    dataBinding{
+    dataBinding {
         enabled true
     }
 
-    lintOptions{
+    lintOptions {
         abortOnError false //如果发现错误lint工具是否应该退出这个程序
     }
 }
@@ -52,7 +64,7 @@ dependencies {
     if(rootProject.ext.isComponent){
         api project(':modules:base')
     }else{
-
+        api project(':modules:base')
     }
 }
 
