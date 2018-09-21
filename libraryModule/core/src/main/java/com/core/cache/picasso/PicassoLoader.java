@@ -104,7 +104,7 @@ public class PicassoLoader implements ILoaderStrategy {
         if(options.targetView instanceof ImageView){
             requestCreator.into((ImageView)options.targetView);
         }else if(options.callback != null){
-
+            requestCreator.into(new PicassoTarget(options.callback));
         }
     }
 
