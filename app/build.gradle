@@ -36,6 +36,11 @@ android {
 
     }
 
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INFO/NOTICE'
+    }
+
     //签名
     signingConfigs {
 
@@ -56,11 +61,20 @@ android {
     }
 }
 
+//去除重复的support包
+configurations.all {
+    resolutionStrategy.eachDependency{ DependencyResolveDetails details->
+        def requested = details.requested
+        if(requested.group == 'com.android.support'){
+            if(!requested.name.startsWith("multidex")){
+                details.useVersion rootProject.ext.supportLibraryVersion
+            }
+        }
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation rootProject.ext.dependencies.appcompatV7
-    implementation rootProject.ext.dependencies.design
-
     if(rootProject.ext.isComponent){
         api project(':modules:base')
     }else{
@@ -68,6 +82,7 @@ dependencies {
     }
 }
 
+//将签名文件密码存储在本地文件
 task getReleasePassword << {
     def password = ''
     if(rootProject.file('private.properties').exists()){

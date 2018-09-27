@@ -23,6 +23,7 @@ public class LoaderOptions {
     //是否缓存到本地
     public boolean skipLocalCache;
     public boolean skipNetCache;
+    public boolean skipMemoryCache;
     public Bitmap.Config config = Bitmap.Config.RGB_565;
     //针对Fresco加载View时候的宽高
     public int targetWidth;
@@ -116,6 +117,11 @@ public class LoaderOptions {
 
     public LoaderOptions skipNetCache(boolean skipNetCache){
         this.skipNetCache = skipNetCache;
+        return this;
+    }
+
+    public LoaderOptions skipMemoryCache(boolean skipMemoryCache){
+        this.skipMemoryCache = skipMemoryCache;
         return this;
     }
 

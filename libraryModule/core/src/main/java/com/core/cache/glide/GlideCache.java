@@ -1,4 +1,4 @@
-package com.core.cache;
+package com.core.cache.glide;
 
 import android.content.Context;
 import android.os.Environment;

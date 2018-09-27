@@ -3,7 +3,6 @@ package com.core.logger;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.acmenxd.logger.utils.LoggerUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
